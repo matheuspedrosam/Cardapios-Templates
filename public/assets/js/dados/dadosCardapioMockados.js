@@ -1,4 +1,4 @@
-export const cardapio = [
+export const dadosCardapio = [
     {
       categoria: "Entrada",
       nome: "Carpaccio de Beterraba",
