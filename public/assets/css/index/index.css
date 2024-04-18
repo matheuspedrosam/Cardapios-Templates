@@ -1,0 +1,36 @@
+*{
+    /* margin: 0; */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+body{
+    padding: 0px 20px;
+}
+
+ul{
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+ul li{
+    cursor: pointer;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 322px;
+}
+
+ul li div img{
+    border-radius: 5px;
+}
+
+ul li:hover{
+    box-shadow: 0px 0px 4px lightgray;
+}

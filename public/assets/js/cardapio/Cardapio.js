@@ -12,13 +12,24 @@ export class Cardapio{
     headerNavUL_DOM;
     footerNavUL_DOM;
 
-    constructor(dadosCardapio, dadosCategorias, dadosRestaurante){
+    constructor(dadosRestaurante){
+        const dadosCardapio = dadosRestaurante.data().menu;
+
+        // Tratando as categorias:
+        const dadosCategoriasComDuplicatas = [];
+        dadosRestaurante.data().menu.forEach((menu) => {
+            dadosCategoriasComDuplicatas.push(menu.categoria)
+        });
+        const dadosCategorias = dadosCategoriasComDuplicatas.filter((categorias, i) => {
+            return dadosCategoriasComDuplicatas.indexOf(categorias) === i;
+        })
+
         this.cardapio = dadosCardapio;
         this.categorias = dadosCategorias;
 
-        this.nomeRestaurante = dadosRestaurante.nome;
-        this.descricaoRestaurante = dadosRestaurante.descricao;
-        this.contatosRestaurante = dadosRestaurante.contatos;
+        this.nomeRestaurante = dadosRestaurante.data().nome;
+        this.descricaoRestaurante = dadosRestaurante.data().descricao;
+        this.contatosRestaurante = dadosRestaurante.data().contatos;
 
         this.main_DOM = document.querySelector("main");
         this.headerNavUL_DOM = document.querySelector("header nav ul");
@@ -31,7 +42,7 @@ export class Cardapio{
         for (let categoria of this.categorias){
             totalCategorias == 0 ? classe = "selected" : classe = "";
 
-            this.headerNavUL_DOM.innerHTML += `<li id="${categoria.id}" class="${classe}">${categoria.nome}</li>`
+            this.headerNavUL_DOM.innerHTML += `<li class="${classe}">${categoria}</li>`
             
             totalCategorias += 1;
         }
@@ -46,14 +57,14 @@ export class Cardapio{
                 <h3>Hungry? No Problem!</h3>
                 <p>${this.descricaoRestaurante}</p>
 
-                <p class="contacts">Email: D@gmail.com</p>
-                <p class="contacts">Tel: (82) 99999-9999</p>
-                <p class="contacts">Instagram: @Danny's</p>
+                <p class="contacts">Email: ${this.contatosRestaurante.email}</p>
+                <p class="contacts">Tel: ${this.contatosRestaurante.tel}</p>
+                <p class="contacts">Instagram: ${this.contatosRestaurante.instagram}</p>
             </div>
         `
     }
     
-    inserirItens(categoriaSelecionada = this.categorias[0].nome){
+    inserirItens(categoriaSelecionada = this.categorias[0]){
         if(!this.footerNavUL_DOM.children[1].classList.contains("selected")){
             for (let numeroPagina of this.footerNavUL_DOM.children){
                 numeroPagina.classList.remove("selected");
