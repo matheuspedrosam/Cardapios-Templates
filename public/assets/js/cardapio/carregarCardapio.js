@@ -23,11 +23,11 @@ async function carregarCardapio(restauranteId){
 
 // Chamando a função e inserindo o layout defenido
 const urlParams = new URLSearchParams(window.location.search)
+
 const restauranteEscolhido = urlParams.get("nome");
 
-if(restauranteEscolhido == null){
-    window.location = 'index.html';
-}
+if(restauranteEscolhido == null) window.location = 'index.html';
 
 await carregarCardapio(restauranteEscolhido);
+
 document.querySelector('head').innerHTML += `<link rel="stylesheet" href="assets/css/cardapio/cardapioLayouts/${urlParams.get("layout")}.css">`;
